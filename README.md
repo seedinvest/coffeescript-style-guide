@@ -1,22 +1,17 @@
-# CoffeeScript Style Guide
+# Apiary CoffeeScript Style Guide
 
 This guide presents a collection of best-practices and coding conventions for the [CoffeeScript][coffeescript] programming language.
 
-This guide is intended to be community-driven, and contributions are highly encouraged.
+It intentionally diverges a bit from idioms, such as _optional function parentheses_ or _use the coolest available syntactic sugar to write it all on just a single line_. Aim of this style guide is to be _closer to Python than to Perl_ and to avoid [some readability problems][bad-readability].
 
-Please note that this is a work-in-progress: there is much more that can be specified, and some of the guidelines that have been specified may not be deemed to be idiomatic by the community (in which case, these offending guidelines will be modified or removed, as appropriate).
+**Please note that this is a work-in-progress. Use standard GitHub flow for issuing objections, ideas, contributions. Style Guide should be based on consensus, so your ideas are very welcome.**
 
 ## Inspiration
 
 The details in this guide have been very heavily inspired by several existing style guides and other resources. In particular:
 
+- [CoffeeScript Style Guide][csg] by Polar Mobile Group
 - [PEP-8][pep8]: Style Guide for Python Code
-- Bozhidar Batsov's [Ruby Style Guide][ruby-style-guide]
-- [Google's JavaScript Style Guide][google-js-styleguide]
-- [Common CoffeeScript Idioms][common-coffeescript-idioms]
-- Thomas Reynolds' [CoffeeScript-specific Style Guide][coffeescript-specific-style-guide]
-- Jeremy Ashkenas' [code review][spine-js-code-review] of [Spine][spine-js]
-- The [CoffeeScript FAQ][coffeescript-faq]
 
 ## Table of Contents
 
@@ -102,7 +97,7 @@ bar:
 
 Always use commas to separate function arguments:
 
-```
+```coffeescript
 # Yes
 moveTo(10,
   key: value
@@ -173,8 +168,8 @@ UTF-8 is the only allowed source file encoding.
 If using a module system (CommonJS Modules, AMD, etc.), `require` statements should be placed on separate lines.
 
 ```coffeescript
-require 'lib/setup'
-Backbone = require 'backbone'
+require('lib/setup')
+Backbone = require('backbone')
 ```
 These statements should be grouped in the following order:
 
@@ -190,15 +185,15 @@ Avoid extraneous whitespace in the following situations:
 - Immediately inside parentheses, brackets or braces
 
     ```coffeescript
-       ($ 'body') # Yes
-       ( $ 'body' ) # No
+       $('body') # Yes
+       $( 'body' ) # No
     ```
 
 - Immediately before a comma
 
     ```coffeescript
-       console.log x, y # Yes
-       console.log x , y # No
+       console.log(x, y) # Yes
+       console.log(x , y) # No
     ```
 
 Additional recommendations:
@@ -407,7 +402,11 @@ Use string blocks for large strings:
 str = '''
   Very long block of text, which has multiple lines.
 
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel finibus ante. Morbi venenatis ante lacus, vitae rutrum odio pharetra vitae. Quisque mollis augue ac nisl dignissim pulvinar. Etiam gravida viverra sollicitudin. Praesent eu ex ultrices, vulputate lectus eu, laoreet nisl.
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel
+  finibus ante. Morbi venenatis ante lacus, vitae rutrum odio pharetra
+  vitae. Quisque mollis augue ac nisl dignissim pulvinar. Etiam gravida
+  viverra sollicitudin. Praesent eu ex ultrices, vulputate lectus eu,
+  laoreet nisl.
 '''
 ```
 
@@ -419,7 +418,11 @@ if condition
     str = '''
       Very long block of text, which has multiple lines.
 
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel finibus ante. Morbi venenatis ante lacus, vitae rutrum odio pharetra vitae. Quisque mollis augue ac nisl dignissim pulvinar. Etiam gravida viverra sollicitudin. Praesent eu ex ultrices, vulputate lectus eu, laoreet nisl.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+      vel finibus ante. Morbi venenatis ante lacus, vitae rutrum odio
+      pharetra vitae. Quisque mollis augue ac nisl dignissim pulvinar.
+      Etiam gravida viverra sollicitudin. Praesent eu ex ultrices,
+      vulputate lectus eu, laoreet nisl.
     '''
 ```
 
@@ -469,7 +472,7 @@ if true then value = (42 or 38) else value = (5 unless false) or true # No
 One-line trailing conditionals should be used cautiously, preferably only for very short and simple conditions:
 
 ```coffeescript
-return cb err if err # Yes
+return cb(err) if err # Yes
 
 value = k for k, v of object unless err # No
 ```
@@ -498,7 +501,7 @@ result = (item for item in array when item.name is "test")
 To iterate over the keys and values of objects:
 
 ```coffeescript
-object = one: 1, two: 2
+object = {one: 1, two: 2}
 alert("#{key} = #{value}") for key, value of object
 ```
 
@@ -515,7 +518,7 @@ for keySomething, valueSomething of object.nestedObject.nestedArray
 values = (valueSomething for keySomething, valueSomething of object.nestedObject.nestedArray when keySomething > 42)
 ```
 
-Use one-line lists only for very short and simple constructs:
+Use inline loops only for very short and simple constructs:
 
 ```coffeescript
 # Yes
@@ -536,6 +539,8 @@ For example, do not modify `Array.prototype` to introduce `Array#forEach`.
 ## Exceptions
 
 Do not suppress exceptions.
+
+Never throw exceptions in asynchronous flow. Use first callback parameter for passing an error object.
 
 <a name="annotations"/>
 ## Annotations
@@ -573,14 +578,26 @@ If a custom annotation is required, the annotation should be documented in the p
 <a name="idioms"/>
 ## Idioms
 
-- Readability counts.
-- Consistency counts.
-- DRY counts.
+From [Zen of Python][zen-of-python]:
+
+- Beautiful is better than ugly.
 - Explicit is better than implicit.
 - Simple is better than complex.
 - Complex is better than complicated.
+- Flat is better than nested.
+- Sparse is better than dense.
+- Readability counts.
+- Special cases aren't special enough to break the rules.
+- Although practicality beats purity.
 - If the implementation is hard to explain, it's a bad idea.
 - If the implementation is easy to explain, it may be a good idea.
+
+And more:
+
+- Consistency counts.
+- DRY counts.
+
+### Readability
 
 Strive for readability. Your code is going to be written once, but read many, many times.
 
@@ -593,7 +610,32 @@ included = !!~ 'a long test string'.indexOf 'test' # No
 
 Ignore those parts of other guidelines which recommend to go against readability (i.e., [The Little Book on CoffeeScript][idioms]).
 
+### DRY
+
 Strive for DRY, mind that [premature DRY is the same evil as premature optimization][dry].
+
+### Asynchronous flow
+
+Unless specified otherwise, handle asynchronous flow using [async.js][async] library instead of nested callbacks:
+
+```coffeescript
+# Yes
+async.waterfall [
+  (next) -> ...
+  (result, next) -> ...
+  (result, next) -> ...
+], cb
+
+# No
+fn((err, result) ->
+  return cb(err) if err
+  ...
+)
+```
+
+### Filling gaps in standard library
+
+Use [Underscore.js][underscore] when you're missing some very basic features (e.g., for object and array manipulation) and they're not present in standard library.
 
 <a name="miscellaneous"/>
 ## Miscellaneous
@@ -651,20 +693,18 @@ console.log args... # Yes
 
 Use explicit empty `return` statements to preserve performance in case large objects would be returned unnecessarily (e.g., results of loops).
 
-Use literal syntax where applicable. Use built-ins if available.
+Use literal syntax where applicable. Use built-ins if they're available.
 
 Use `Array::join` for programatically building up a string.
 
+[bad-readability]: http://ceronman.com/2012/09/17/coffeescript-less-typing-bad-readability/
 [coffeescript]: http://jashkenas.github.com/coffee-script/
 [coffeescript-issue-425]: https://github.com/jashkenas/coffee-script/issues/425
-[spine-js]: http://spinejs.com/
-[spine-js-code-review]: https://gist.github.com/1005723
 [pep8]: http://www.python.org/dev/peps/pep-0008/
-[ruby-style-guide]: https://github.com/bbatsov/ruby-style-guide
-[google-js-styleguide]: http://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml
-[common-coffeescript-idioms]: http://arcturo.github.com/library/coffeescript/04_idioms.html
-[coffeescript-specific-style-guide]: http://awardwinningfjords.com/2011/05/13/coffeescript-specific-style-guide.html
-[coffeescript-faq]: https://github.com/jashkenas/coffee-script/wiki/FAQ
+[csg]: https://github.com/polarmobile/coffeescript-style-guide
 [camel-case-variations]: http://en.wikipedia.org/wiki/CamelCase#Variations_and_synonyms
 [idioms]: http://arcturo.github.io/library/coffeescript/04_idioms.html
 [dry]: http://blog.ploeh.dk/2014/08/07/why-dry/
+[zen-of-python]: https://www.python.org/dev/peps/pep-0020/
+[async]: https://github.com/caolan/async
+[underscore]: http://underscorejs.org
