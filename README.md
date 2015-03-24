@@ -100,7 +100,7 @@ bar:
 <a name="encoding"/>
 ### Encoding
 
-UTF-8 is the preferred source file encoding.
+UTF-8 is the only allowed source file encoding.
 
 <a name="module_imports"/>
 ## Module Imports
