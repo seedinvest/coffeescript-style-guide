@@ -349,7 +349,7 @@ if condition
 <a name="conditionals"/>
 ## Conditionals
 
-Favor `unless` over `if` for negative conditions.
+Favor `unless` over `if` for negative conditions, but preferably only for short, almost one-line conditionals.
 
 Instead of using `unless...else`, use `if...else`:
 
@@ -381,6 +381,22 @@ Multi-line if/else clauses should use indentation:
   else ...
 ```
 
+One-line if/then/else conditionals should be used cautiously, preferably only for very short and simple conditions in assignments:
+
+```coffeescript
+value = if true then 42 else 0 # Yes
+
+if true then value = (42 or 38) else value = (5 unless false) or true # No
+```
+
+One-line trailing conditionals should be used cautiously, preferably only for very short and simple conditions:
+
+```coffeescript
+return cb err if err # Yes
+
+value = k for k, v of object unless err # No
+```
+
 <a name="looping_and_comprehensions"/>
 ## Looping and Comprehensions
 
@@ -407,6 +423,29 @@ To iterate over the keys and values of objects:
 ```coffeescript
 object = one: 1, two: 2
 alert("#{key} = #{value}") for key, value of object
+```
+
+As CoffeeScript doesn't support multi-line comprehentions, in case your comprehension is too long for one line, use proper loop instead:
+
+```coffeescript
+# Yes
+values = []
+for keySomething, valueSomething of object.nestedObject.nestedArray
+  if keySomething > 42
+    values.push valueSomething
+
+# No
+values = (valueSomething for keySomething, valueSomething of object.nestedObject.nestedArray when keySomething > 42)
+```
+
+Use one-line lists only for very short and simple constructs:
+
+```coffeescript
+# Yes
+object[v] = k for k, v of data
+
+# No
+(if val.length then arr.push (i for i, j of val)) for val in things
 ```
 
 <a name="extending_native_objects"/>
