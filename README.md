@@ -324,6 +324,28 @@ Use string interpolation instead of string concatenation:
 
 Prefer single quoted strings (`''`) instead of double quoted (`""`) strings, unless features like string interpolation are being used for the given string.
 
+Use string blocks for large strings:
+
+```coffeescript
+str = '''
+  Very long block of text, which has multiple lines.
+
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel finibus ante. Morbi venenatis ante lacus, vitae rutrum odio pharetra vitae. Quisque mollis augue ac nisl dignissim pulvinar. Etiam gravida viverra sollicitudin. Praesent eu ex ultrices, vulputate lectus eu, laoreet nisl.
+'''
+```
+
+Mind that CoffeeScript supports indentation of such strings for better readability:
+
+```coffeescript
+if condition
+  fn = (arg1, arg2) ->
+    str = '''
+      Very long block of text, which has multiple lines.
+
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel finibus ante. Morbi venenatis ante lacus, vitae rutrum odio pharetra vitae. Quisque mollis augue ac nisl dignissim pulvinar. Etiam gravida viverra sollicitudin. Praesent eu ex ultrices, vulputate lectus eu, laoreet nisl.
+    '''
+```
+
 <a name="conditionals"/>
 ## Conditionals
 
