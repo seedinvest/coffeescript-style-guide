@@ -506,11 +506,11 @@ If a custom annotation is required, the annotation should be documented in the p
 
 `not` is preferred over `!`.
 
-`or=` should be used when possible:
+`?=` should be used when possible:
 
 ```coffeescript
-temp or= {} # Yes
-temp = temp || {} # No
+temp ?= {} # Yes
+temp = temp or {} # No
 ```
 
 Prefer shorthand notation (`::`) for accessing an object's prototype:
