@@ -99,6 +99,20 @@ bar:
   value: 87
 ```
 
+Always use commas to separate function arguments:
+
+```
+# Yes
+moveTo(10,
+  key: value
+)
+
+# No
+moveTo(10
+  key: value
+)
+```
+
 <a name="optional_braces"/>
 ### Optional Braces
 
@@ -321,46 +335,58 @@ In cases where method calls are being chained and the code does not fit on a sin
   .reduce((x, y) -> x + y)
 ```
 
-When calling functions, choose to omit or include parentheses in such a way that optimizes for readability. Keeping in mind that "readability" can be subjective, the following examples demonstrate cases where parentheses have been omitted or included in a manner that the community deems to be optimal:
+When calling functions, never omit parentheses. It is a strict and strong rule, but it deals with significant majority of ambiguous cases and problems you can find in CoffeeScript:
 
 ```coffeescript
-baz 12
+baz(12)
 
-brush.ellipse x: 10, y: 20 # Braces can also be omitted or included for readability
+brush.ellipse({x: 10, y: 20})
 
 foo(4).bar(8)
 
 obj.value(10, 20) / obj.value(20, 10)
 
-print inspect value
+print(inspect(value))
 
 new Tag(new Value(a, b), new Arg(c))
 ```
 
-You will sometimes see parentheses used to group functions (instead of being used to group function parameters). Examples of using this style (hereafter referred to as the "function grouping style"):
+Do not use grouping functions instead of grouping parameters:
 
 ```coffeescript
-($ '#selektor').addClass 'klass'
+$('#selektor').addClass('klass') # Yes
+($ '#selektor').addClass 'klass' # No
 
-(foo 4).bar 8
+foo(4).bar(8) # Yes
+(foo 4).bar 8 # No
 ```
 
-This is in contrast to:
+Use parentheses and commas properly when writing nested function definitions:
 
 ```coffeescript
-$('#selektor').addClass 'klass'
-
-foo(4).bar 8
+fn(42, 'string', (err) ->
+  console.error err.message
+, (arg1, arg2) ->
+  arg1 + arg2
+)
 ```
 
-In cases where method calls are being chained, some adopters of this style prefer to use function grouping for the initial call only:
+Do not use inline functions unless they're very short and simple:
 
 ```coffeescript
-($ '#selektor').addClass('klass').hide() # Initial call only
-(($ '#selektor').addClass 'klass').hide() # All calls
-```
+# Yes
+(x) -> x + x
 
-The function grouping style is not recommended. However, **if the function grouping style is adopted for a particular project, be consistent with its usage.**
+# Yes
+(x) ->
+  if true
+    42
+  else
+    x + x
+
+# No
+(x) -> if true then 42 else (x + x)
+```
 
 <a name="strings"/>
 ## Strings
