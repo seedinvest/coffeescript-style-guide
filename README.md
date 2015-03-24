@@ -31,6 +31,7 @@ The details in this guide have been very heavily inspired by several existing st
         * [Inline Comments](#inline_comments)
     * [Naming Conventions](#naming_conventions)
     * [Functions](#functions)
+    * [Deconstructions](#deconstructions)
     * [Strings](#strings)
     * [Conditionals](#conditionals)
     * [Looping and Comprehensions](#looping_and_comprehensions)
@@ -177,6 +178,13 @@ These statements should be grouped in the following order:
 2. Third party library imports
 3. Local imports _(imports specific to this application or library)_
 
+Do not use `.coffee` extension while specifying path to a local module.
+
+```coffee
+mod = require('module') # Yes
+mod = require('module.coffee') # No
+```
+
 <a name="whitespace"/>
 ## Whitespace in Expressions and Statements
 
@@ -302,6 +310,21 @@ Methods and variables that are intended to be "private" should begin with a lead
 _privateMethod: ->
 ```
 
+### File names
+
+Use dash-separated words for naming files:
+
+```
+user-rights.coffee
+private-traffic.coffee
+```
+
+Use `camelCase` for objects imported from files with dash-separated names:
+
+```coffeescript
+userRights = require('../user-rights')
+```
+
 <a name="functions"/>
 ## Functions
 
@@ -383,6 +406,53 @@ Do not use inline functions unless they're very short and simple:
 # No
 (x) -> if true then 42 else (x + x)
 ```
+
+<a name="deconstructions"/>
+## Deconstructions
+
+Keep deconstructions one-line unless they are too many:
+
+```coffeescript
+# Yes
+{one, two} = object
+
+# Yes
+{
+  one
+  two
+  three
+  four
+  five
+  six
+} = object
+
+# No
+{
+  one
+  two
+} = object
+```
+
+If there are too many deconstructed elements, consider not using deconstruction at all:
+
+```coffeescript
+# Yes
+object.one
+object.four
+...
+
+# No
+{
+  one
+  two
+  three
+  four
+  five
+  six
+} = object
+```
+
+The same rules apply to array deconstructions.
 
 <a name="strings"/>
 ## Strings
