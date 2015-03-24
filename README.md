@@ -27,6 +27,7 @@ The details in this guide have been very heavily inspired by several existing st
         * [Blank Lines](#blank_lines)
         * [Trailing Whitespace](#trailing_whitespace)
         * [Optional Commas](#optional_commas)
+        * [Optional Braces](#optional_braces)
         * [Encoding](#encoding)
     * [Module Imports](#module_imports)
     * [Whitespace in Expressions and Statements](#whitespace)
@@ -95,6 +96,54 @@ foo = [
 bar:
   label: 'test',
   value: 87
+```
+
+<a name="optional_braces"/>
+### Optional Braces
+
+Avoid use of braces in multi-line object literals:
+
+```coffeescript
+# Yes
+value =
+  color: 'blue'
+  size: 42
+
+# No
+value = {
+  color: 'blue'
+  size: 42
+}
+```
+
+Use braces in case you need implicit key-value pairs:
+
+```coffeescript
+# Yes
+value = {
+  color: 'blue'
+  size
+}
+
+# No
+value = {
+  color: 'blue'
+  size: 42
+}
+```
+
+Always use braces in one-line object literals:
+
+```coffeescript
+{color: 'blue', size: 42} # Yes
+color: 'blue', size: 42 # No
+```
+
+Avoid extraneous whitespace in one-line object literals:
+
+```coffeescript
+{color: 'blue', size: 42} # Yes
+{ color: 'blue', size: 42 } # No
 ```
 
 <a name="encoding"/>
@@ -254,7 +303,7 @@ foo = (arg1, arg2) -> # Yes
 foo = (arg1, arg2)-> # No
 ```
 
-Do not use parentheses when declaring functions that take no arguments:
+Do not use parentheses when declaring procedures (functions that take no arguments):
 
 ```coffeescript
 bar = -> # Yes
@@ -527,7 +576,7 @@ return @property # Yes
 return this.property # No
 ```
 
-For consistency, use also **standalone** `@`:
+For consistency, use also standalone `@`:
 
 ```coffeescript
 return @ # Yes
