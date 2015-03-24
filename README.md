@@ -42,6 +42,7 @@ The details in this guide have been very heavily inspired by several existing st
     * [Extending Native Objects](#extending_native_objects)
     * [Exceptions](#exceptions)
     * [Annotations](#annotations)
+    * [Idioms](#idioms)
     * [Miscellaneous](#miscellaneous)
 
 <a name="code_layout"/>
@@ -542,6 +543,27 @@ Annotation types:
 
 If a custom annotation is required, the annotation should be documented in the project's README.
 
+<a name="idioms"/>
+## Idioms
+
+- Readability counts.
+- Explicit is better than implicit.
+- Simple is better than complex.
+- Complex is better than complicated.
+- If the implementation is hard to explain, it's a bad idea.
+- If the implementation is easy to explain, it may be a good idea.
+
+Strive for readability. Your code is going to be written once, but read many, many times.
+
+Too much syntactic sugar causes diabetes. Don't use something just because it's cool. Never use something in case you even _slightly_ hesitate that you may be the only person in the company being aware of how it works:
+
+```
+included = 'a long test string'.indexOf('test') isnt -1 # Yes
+included = !!~ 'a long test string'.indexOf 'test' # No
+```
+
+Ignore those parts of other guidelines which recommend to go against readability (i.e., [The Little Book on CoffeeScript][idioms]).
+
 <a name="miscellaneous"/>
 ## Miscellaneous
 
@@ -604,3 +626,4 @@ console.log args... # Yes
 [coffeescript-specific-style-guide]: http://awardwinningfjords.com/2011/05/13/coffeescript-specific-style-guide.html
 [coffeescript-faq]: https://github.com/jashkenas/coffee-script/wiki/FAQ
 [camel-case-variations]: http://en.wikipedia.org/wiki/CamelCase#Variations_and_synonyms
+[idioms]: http://arcturo.github.io/library/coffeescript/04_idioms.html
