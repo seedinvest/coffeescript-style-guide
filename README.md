@@ -534,7 +534,7 @@ return @ # Yes
 return this # No
 ```
 
-Avoid `return` where not required, unless the explicit return increases clarity.
+Avoid `return` where not required, unless the explicit return increases clarity. Use explicit empty `return` statements to preserve performance in case large objects would be returned unnecessarily (e.g., results of loops).
 
 Use splats (`...`) when working with functions that accept variable numbers of arguments:
 
