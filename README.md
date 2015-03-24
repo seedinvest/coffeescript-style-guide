@@ -59,7 +59,7 @@ Limit all lines to a maximum of 79 characters.
 <a name="blank_lines"/>
 ### Blank Lines
 
-Separate top-level function and class definitions with a single blank line.
+Separate top-level function and class definitions with two blank lines.
 
 Separate method definitions inside of a class with a single blank line.
 
