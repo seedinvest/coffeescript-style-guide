@@ -573,6 +573,8 @@ If a custom annotation is required, the annotation should be documented in the p
 ## Idioms
 
 - Readability counts.
+- Consistency counts.
+- DRY counts.
 - Explicit is better than implicit.
 - Simple is better than complex.
 - Complex is better than complicated.
@@ -589,6 +591,8 @@ included = !!~ 'a long test string'.indexOf 'test' # No
 ```
 
 Ignore those parts of other guidelines which recommend to go against readability (i.e., [The Little Book on CoffeeScript][idioms]).
+
+Strive for DRY, mind that [premature DRY is the same evil as premature optimization][dry].
 
 <a name="miscellaneous"/>
 ## Miscellaneous
@@ -653,3 +657,4 @@ console.log args... # Yes
 [coffeescript-faq]: https://github.com/jashkenas/coffee-script/wiki/FAQ
 [camel-case-variations]: http://en.wikipedia.org/wiki/CamelCase#Variations_and_synonyms
 [idioms]: http://arcturo.github.io/library/coffeescript/04_idioms.html
+[dry]: http://blog.ploeh.dk/2014/08/07/why-dry/
