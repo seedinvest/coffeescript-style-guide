@@ -673,7 +673,7 @@ Strive for readability. Your code is going to be written once, but read many, ma
 
 Too much syntactic sugar causes diabetes. Don't use something just because it's cool. Never use something in case you even _slightly_ hesitate that you may be the only person in the company being aware of how it works:
 
-```
+```coffeescript
 included = 'a long test string'.indexOf('test') isnt -1 # Yes
 included = !!~ 'a long test string'.indexOf 'test' # No
 ```
