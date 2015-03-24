@@ -682,7 +682,7 @@ Ignore those parts of other guidelines which recommend to go against readability
 
 ### DRY
 
-Strive for DRY, mind that [premature DRY is the same evil as premature optimization][dry].
+Strive for DRY, but mind that [premature DRY is the same evil as premature optimization][dry].
 
 ### Asynchronous flow
 
