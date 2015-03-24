@@ -44,6 +44,7 @@ The details in this guide have been very heavily inspired by several existing st
     * [Annotations](#annotations)
     * [Idioms](#idioms)
     * [Miscellaneous](#miscellaneous)
+    * [Optimization](#optimization)
 
 <a name="code_layout"/>
 ## Code layout
@@ -635,7 +636,7 @@ return @ # Yes
 return this # No
 ```
 
-Avoid `return` where not required, unless the explicit return increases clarity. Use explicit empty `return` statements to preserve performance in case large objects would be returned unnecessarily (e.g., results of loops).
+Avoid `return` where not required, unless the explicit return increases clarity.
 
 Use splats (`...`) when working with functions that accept variable numbers of arguments:
 
@@ -644,6 +645,15 @@ console.log args... # Yes
 
 (a, b, c, rest...) -> # Yes
 ```
+
+<a name="optimization"/>
+## Optimization
+
+Use explicit empty `return` statements to preserve performance in case large objects would be returned unnecessarily (e.g., results of loops).
+
+Use literal syntax where applicable. Use built-ins if available.
+
+Use `Array::join` for programatically building up a string.
 
 [coffeescript]: http://jashkenas.github.com/coffee-script/
 [coffeescript-issue-425]: https://github.com/jashkenas/coffee-script/issues/425
