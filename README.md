@@ -466,11 +466,11 @@ return @property # Yes
 return this.property # No
 ```
 
-However, avoid the use of **standalone** `@`:
+For consistency, use also **standalone** `@`:
 
 ```coffeescript
-return this # Yes
-return @ # No
+return @ # Yes
+return this # No
 ```
 
 Avoid `return` where not required, unless the explicit return increases clarity.
