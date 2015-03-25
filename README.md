@@ -181,9 +181,10 @@ Backbone = require('backbone')
 ```
 These statements should be grouped in the following order:
 
-1. Standard library imports _(if a standard library exists)_
-2. Third party library imports
+1. Standard library imports _(if a standard library exists)_ and third party library imports
 3. Local imports _(imports specific to this application or library)_
+
+Groups should be separated by one blank line from each other and by two blank lines from the rest of the file.
 
 Do not use `.coffee` extension while specifying path to a local module.
 
