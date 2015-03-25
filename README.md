@@ -367,7 +367,13 @@ In cases where method calls are being chained and the code does not fit on a sin
   .reduce((x, y) -> x + y)
 ```
 
-When calling functions, never omit parentheses. It is a strict and strong rule, but it deals with significant majority of ambiguous cases and problems you can find in CoffeeScript:
+------
+
+**Warning:** Following part about omitting parentheses is a subject of upcoming discussion. We're gathering pros and cons and we strive to make the final decision while being aware of all tradeoffs and after dropping the emotions. After the decision is made, the resoning is going to be attached for the record.
+
+------
+
+When calling functions, **never omit parentheses**. It is a strict and strong rule, but it deals with significant majority of ambiguous cases and problems you can find in CoffeeScript:
 
 ```coffeescript
 baz(12)
@@ -382,6 +388,8 @@ print(inspect(value))
 
 new Tag(new Value(a, b), new Arg(c))
 ```
+
+------
 
 Do not use grouping functions instead of grouping parameters:
 
