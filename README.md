@@ -719,6 +719,74 @@ fn((err, result) ->
 )
 ```
 
+Consider more than one statement `return cb(err) if err` as code smell. Do not nest more than one asynchronous function, always use `async.js` instead for a flow consisting two or more functions.
+
+Use `cb` as a name for callbacks and `err` as a name for errors:
+
+```coffeescript
+# Yes
+(err, results) ->
+  cb err
+
+# No
+(error, results) ->
+  callback error
+```
+
+Use `next` as a name for nested callbacks if needed:
+
+```coffeescript
+# Yes
+(args, cb) ->
+  async.waterfall [
+    (next) -> ...
+    (result, next) -> ...
+    (result, next) -> ...
+  ], cb
+
+# No
+(args, cb) ->
+  async.waterfall [
+    (done) -> ... # or whatever other name
+  ], cb
+```
+
+Use `done` as a name for callbacks in tests:
+
+```coffeescript
+# Yes
+before (done) ->
+  ...
+
+# No
+before (next) ->
+  ...
+```
+
+If you run out of names and you need one more name for callback variable on top of `cb` and `next`, then your flow is too complex and you should split it into multiple functions.
+
+```coffeescript
+# Yes
+fn = (cb) ->
+  ...
+
+flow = (args, cb) ->
+  async.waterfall [
+    (next) -> fn(next)
+  ], cb
+
+# No
+flow = (args, cb) ->
+  async.waterfall [
+    (next) ->
+      ...
+        (done) ->
+          ...
+            (callback) ->
+              ...
+  ], cb
+```
+
 <a name="standard_library"/>
 ### Filling gaps in standard library
 
