@@ -30,6 +30,7 @@ The details in this guide have been very heavily inspired by several existing st
         * [Block Comments](#block_comments)
         * [Inline Comments](#inline_comments)
     * [Naming Conventions](#naming_conventions)
+        * [File Names](#file_names)
     * [Functions](#functions)
     * [Deconstructions](#deconstructions)
     * [Strings](#strings)
@@ -39,6 +40,10 @@ The details in this guide have been very heavily inspired by several existing st
     * [Exceptions](#exceptions)
     * [Annotations](#annotations)
     * [Idioms](#idioms)
+        * [Readability](#readability)
+        * [DRY](#dry)
+        * [Asynchronous flow](#async)
+        * [Filling gaps in standard library](#standard_library)
     * [Miscellaneous](#miscellaneous)
     * [Optimization](#optimization)
 
@@ -310,6 +315,7 @@ Methods and variables that are intended to be "private" should begin with a lead
 _privateMethod: ->
 ```
 
+<a name="file_names"/>
 ### File names
 
 Use dash-separated words for naming files:
@@ -667,6 +673,7 @@ And more:
 - Consistency counts.
 - DRY counts.
 
+<a name="readability"/>
 ### Readability
 
 Strive for readability. Your code is going to be written once, but read many, many times.
@@ -680,10 +687,12 @@ included = !!~ 'a long test string'.indexOf 'test' # No
 
 Ignore those parts of other guidelines which recommend to go against readability (i.e., [The Little Book on CoffeeScript][idioms]).
 
+<a name="dry"/>
 ### DRY
 
 Strive for DRY, but mind that [premature DRY is the same evil as premature optimization][dry].
 
+<a name="async"/>
 ### Asynchronous flow
 
 Unless specified otherwise, handle asynchronous flow using [async.js][async] library instead of nested callbacks:
@@ -703,6 +712,7 @@ fn((err, result) ->
 )
 ```
 
+<a name="standard_library"/>
 ### Filling gaps in standard library
 
 Use [Underscore.js][underscore] when you're missing some very basic features (e.g., for object and array manipulation) and they're not present in standard library.
