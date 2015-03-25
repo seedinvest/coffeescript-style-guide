@@ -318,18 +318,22 @@ _privateMethod: ->
 <a name="file_names"/>
 ### File names
 
-Use dash-separated words for naming files:
+Use camelCase for naming files:
 
 ```
-user-rights.coffee
-private-traffic.coffee
+userRights.coffee
+privateTraffic.coffee
 ```
 
-Use `camelCase` for objects imported from files with dash-separated names:
+Do not use any `-test` suffixes for naming test files:
 
-```coffeescript
-userRights = require('../user-rights')
 ```
+tests/userRights.coffee # Yes
+tests/userRights-test.coffee # No
+tests/userRightsTest.coffee # No
+```
+
+The test frameworks are advanced enough to look for the right files.
 
 <a name="functions"/>
 ## Functions
