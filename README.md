@@ -560,6 +560,21 @@ return cb(err) if err # Yes
 value = k for k, v of object unless err # No
 ```
 
+Avoid complex conditionals as much as you can (when relying on lazy evaluation of the conditional, such rule can be tricky). Use named conditions:
+
+```coffeescript
+# Yes
+isLarge = thing > 42 and ...
+isGreen = thing.color is 'green' or ...
+
+if isLarge and isGreen
+  ...
+
+# No
+if (thing > 42 and ...) and (thing.color is 'green' or ...)
+  ...
+```
+
 <a name="looping_and_comprehensions"/>
 ## Looping and Comprehensions
 
