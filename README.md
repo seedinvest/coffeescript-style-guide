@@ -367,12 +367,6 @@ In cases where method calls are being chained and the code does not fit on a sin
   .reduce((x, y) -> x + y)
 ```
 
-------
-
-**Warning:** Following part about omitting parentheses is a subject of upcoming discussion. We're gathering pros and cons and we strive to make the final decision while being aware of all tradeoffs and after dropping the emotions. After the decision is made, the resoning is going to be attached for the record.
-
-------
-
 When calling functions, **never omit parentheses**. It is a strict and strong rule, but it deals with significant majority of ambiguous cases and problems you can find in CoffeeScript:
 
 ```coffeescript
@@ -388,6 +382,23 @@ print(inspect(value))
 
 new Tag(new Value(a, b), new Arg(c))
 ```
+
+------
+
+**Note:** As mandatory parentheses are the most emotional topic in this style guide, let's provide some background for the decision. Having mandatory parentheses around function arguments has...
+
+#### Cons
+
+- more typing
+- not idiomatic CoffeeScript
+- less cool
+
+#### Pros
+
+- unambiguous syntax (maintainable, readable, less mistakes)
+- you would need to use the space character anyway so it's not actually that more typing
+- the biggest CoffeeScript codebases (e.g. [Atom](https://github.com/atom/atom), [Quill](https://github.com/quilljs/quill)) made the same decision
+- you'd need to type them in JavaScript (or almost any other language of this sort) anyway, syntax closer to [ES6](http://en.wikipedia.org/wiki/ECMAScript#ECMAScript_Harmony_.286th_Edition.29)
 
 ------
 
