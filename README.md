@@ -1,4 +1,4 @@
-# Apiary CoffeeScript Style Guide
+# CoffeeScript Style Guide
 
 This guide presents a collection of best-practices and coding conventions for the [CoffeeScript][coffeescript] programming language.
 
